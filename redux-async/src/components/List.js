@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchList } from '../actions';
+import { Card, CardText, CardTitle, CardBody} from 'reactstrap';
 
 function List (props) {
     console.log('propsList', props);
@@ -13,9 +14,16 @@ function List (props) {
     return (
         <div>
             <h2>Wonderful Characters of OverWatch</h2>
-            <div>
-                {props.list.map(ow => (
-                    <h4 key={ow.id}>{ow.name}</h4>
+            <div className="list">
+                {props.list.map(char => (
+                    <Card className='card' >
+                        <CardBody>
+                            <CardTitle className="title">{char.name}</CardTitle>
+                            <CardText>{char.description}</CardText>
+                            <CardText>Affiliation: {char.affiliation}</CardText>
+                            <CardText>Base of Operations: {char.base_of_operations}</CardText>
+                        </CardBody>
+                    </Card>
                 ))}
             </div>
             <button onClick={fetchCharacters}>Get Characters</button>
